@@ -1,6 +1,6 @@
 #pragma once
 
-// #DEFINE NUDGE_DEBUG
+// #define NUDGE_DEBUG
 
 // I2C and ADXL345 ------------------------------------------------------
 #define PIN_SDA0 4

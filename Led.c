@@ -1,10 +1,16 @@
+#include <stdio.h>
 #include "hardware/gpio.h"
 
 #include "Helper.h"
 
+// including various sensor headers for their debug flags
+#include "Buttons.h"
+#include "Nudge.h"
+#include "Plunger.h"
+
 #include "Led.h"
 
-#define LED_DEBUG defined(PINBALL_DEBUG) || defined(NUDGE_DEBUG) || defined(PLUNGER_DEBUG) || defined(NUDGE_DEBUG)
+#define LED_DEBUG defined(NUDGE_DEBUG) || defined(PLUNGER_DEBUG) || defined(BUTTONS_DEBUG)
 
 static bool ledState = false; // True if the led is currently lit, false otherwise
 

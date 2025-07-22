@@ -1,6 +1,6 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "hardware/adc.h"
-#include "pico/stdlib.h"
 
 #include "usb_descriptors.h"
 

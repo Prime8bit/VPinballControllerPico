@@ -1,6 +1,5 @@
+#include <stdio.h>
 #include <stdlib.h>
-#include "hardware/gpio.h"
-#include "hardware/i2c.h"
 #include "pico/binary_info.h"
 
 #include "ADXL345_I2C.h"
@@ -22,7 +21,7 @@ void initNudge()
     bi_decl(bi_2pins_with_func(PIN_SDA0, PIN_SCL0, GPIO_FUNC_I2C));
     accelInitSuccess = initAccel(i2c0, PIN_SDA0, PIN_SCL0);
 #ifdef NUDGE_DEBUG
-    if (accel0InitSuccess)
+    if (accelInitSuccess)
     {
         printf("Successfully initialized accelerometer on i2c0.\n");
     }
@@ -39,7 +38,7 @@ void initNudge()
 bool updateNudge(hid_pinball_report_t* pReport)
 {
 #ifdef NUDGE_DEBUG
-    printf("Updating accelerometers.\n")
+    printf("Updating accelerometers.\n");
 #endif
     int8_t newX, newY, newZ = 0;
 
@@ -49,7 +48,7 @@ bool updateNudge(hid_pinball_report_t* pReport)
         newY = normalizeNudgeReading(getYAccel(i2c0), ACCEL_Y_INVERT, ACCEL_Y_OFFSET);
         newZ = normalizeNudgeReading(getZAccel(i2c0), ACCEL_Z_INVERT, ACCEL_Z_OFFSET);
 #ifdef NUDGE_DEBUG
-        printf ("Read values from the accelerometer on I2C0: (%d, %d, %d) with magSquared %d\n", newX, newY, newZ, magSquared0);
+        printf ("Read values from the accelerometer on I2C0: (%d, %d, %d)\n", newX, newY, newZ);
 #endif
     }
     

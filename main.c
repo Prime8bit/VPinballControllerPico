@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 // My custom code
 #include "ADXL345_I2C.h"
 #include "Buttons.h"
@@ -10,8 +12,6 @@
 // My custom usb descriptor
 #include "usb_descriptors.h"
 
-// #define PINBALL_DEBUG
-
 // STATE ---------------------------------------------------------------
 // This is used for button debouncing and analog threshold enforcement.
 // Once a new state has been read, it is also used to send via USB.
@@ -22,9 +22,8 @@ int main()
 {
     // Init pins GP0 and GP1 for UART debugging
     stdio_init_all();
-#ifdef PINBALL_DEBUG
+
     printf("Begin Pinball Controller.\n");
-#endif
 
     initLed();    
     initButtons();  // Look at the "buttons" array to see which GPIO's are used for buttons.   
@@ -32,9 +31,7 @@ int main()
     initNudge();
     initUsb();     
 
-#ifdef PINBALL_DEBUG
     printf("Initialization Complete.\n");
-#endif 
 
     while (true) {
         // Blink the LED if not in production mode, otherwise just light the LED

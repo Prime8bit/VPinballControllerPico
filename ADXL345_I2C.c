@@ -27,6 +27,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "hardware/gpio.h"
+#include "hardware/i2c.h"
+
 #include "ADXL345_I2C.h"
 
 bool initAccel(i2c_inst_t *i2cPort, uint sda, uint scl)
