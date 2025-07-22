@@ -17,32 +17,32 @@ The code for this project creates a standard USB HID gamepad from a Pi Pico that
 ## Pin assignments
 I used the following pin assignments for this project. When choosing between SPI and I2C for the sensors I went with I2C for two reasons. First was that the adafruit library for the sensor, upon which my code is heavily based, uses I2C exclusively. Second was so there would be fewer wires to manage for the sensor. Using SPI will theoretically allow you to read accelerometer values faster, but will require two additional wires and rewriting the driver for SPI communication. 
 
-GP0 - UART0 TX - For debugging.
-GP1 - UART0 RX - For debugging.
-GP2 - NC - Left unconnected in case you want to use SPI instead of I2C for nudge sensors. I chose I2C so there would be fewer wires to manage.
-GP3 - NC - Left unconnected in case you want to use SPI instead of I2C for nudge sensors. I chose I2C so there would be fewer wires to manage.
-GP4 - I2C0_SDA - For nudge sensor 0.
-GP5 - I2C0_SCL - For nudge sensor 0.
-GP6 - BTN 1
-GP7 - BTN 2
-GP8 - BTN 3
-GP9 - BTN 4
-GP10 - NC - I had originally designated this for a second nudge sensor, but found that trying to use two sensors to be more hassle than it was worth.
-GP11 - NC - I had originally designated this for a second nudge sensor, but found that trying to use two sensors to be more hassle than it was worth.
-GP12 - NC - I had originally designated this for a second nudge sensor, but found that trying to use two sensors to be more hassle than it was worth.
-GP13 - BTN 16 - Made this a higher button number in case someone wanted to use this for a second SPI bus by sacrificing one button. 
-GP14 - BTN 5
-GP15 - BTN 6
-GP16 - BTN 7
-GP17 - BTN 8
-GP18 - BTN 9
-GP19 - BTN 10
-GP20 - BTN 11
-GP21 - BTN 12
-GP22 - BTN 13
-GP26 - BTN 14 - I recommend against using this for buttons if you can avoid it. For some of my analog tests, I discovered that analog inputs on pin 28 would cause false positives on this pin with some potentiometers, but not others.
-GP27 - BTN 15 - I recommend against using this for buttons if you can avoid it. For some of my analog tests, I discovered that analog inputs on pin 28 would cause false positives on this pin with some potentiometers, but not others.
-GP28 - Analog In - Plunger
+ * GP0 - UART0 TX - For debugging.
+ * GP1 - UART0 RX - For debugging.
+ * GP2 - NC - Left unconnected in case you want to use SPI instead of I2C for nudge sensors. I chose I2C so there would be fewer wires to manage.
+ * GP3 - NC - Left unconnected in case you want to use SPI instead of I2C for nudge sensors. I chose I2C so there would be fewer wires to manage.
+ * GP4 - I2C0_SDA - For nudge sensor 0.
+ * GP5 - I2C0_SCL - For nudge sensor 0.
+ * GP6 - BTN 1
+ * GP7 - BTN 2
+ * GP8 - BTN 3
+ * GP9 - BTN 4
+ * GP10 - NC - I had originally designated this for a second nudge sensor, but found that trying to use two sensors to be more hassle than it was worth.
+ * GP11 - NC - I had originally designated this for a second nudge sensor, but found that trying to use two sensors to be more hassle than it was worth.
+ * GP12 - NC - I had originally designated this for a second nudge sensor, but found that trying to use two sensors to be more hassle than it was worth.
+ * GP13 - BTN 16 - Made this a higher button number in case someone wanted to use this for a second SPI bus by sacrificing one button. 
+ * GP14 - BTN 5
+ * GP15 - BTN 6
+ * GP16 - BTN 7
+ * GP17 - BTN 8
+ * GP18 - BTN 9
+ * GP19 - BTN 10
+ * GP20 - BTN 11
+ * GP21 - BTN 12
+ * GP22 - BTN 13
+ * GP26 - BTN 14 - I recommend against using this for buttons if you can avoid it. For some of my analog tests, I discovered that analog inputs on pin 28 would cause false positives on this pin with some potentiometers, but not others.
+ * GP27 - BTN 15 - I recommend against using this for buttons if you can avoid it. For some of my analog tests, I discovered that analog inputs on pin 28 would cause false positives on this pin with some potentiometers, but not others.
+ * GP28 - Analog In - Plunger
 
 ## A note about the nudge sensor
 The ADXL345 sensor has a range of [-511, 511], but I wanted to be efficient with my USB backets so I reduce this range to [-127, 127]. Rather than doing a division conversion, I simply read the value as is and if it is outsizde the [-127, 127] range then I truncate it. This effectively multiplies the reading 4x. This is intentional. I found that when I divided the reading by 4, the reading was too insensitive on my pinball cabinet. Truncating the reading gave me values I liked better. Feel free to adjust the Nudge.c code if you prefer another strategy.
